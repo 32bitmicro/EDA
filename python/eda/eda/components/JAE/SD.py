@@ -33,84 +33,84 @@ from eda.components import *
 		
 		
 class MICRO_SD_package(package):
-    def __init__(self, name="MICROSD", libname="jae",description="MICROSD socket"):
-        package.__init__(self, name, libname,description)
-        self.smt = True
-	# make pins
-       	# all units milimeters mm, always use center of the pin pad
-       	pin1_X = mm2pcb(-11.55)
-	pin1_Y = mm2pcb(3.85)
-	off_X  = 0
-	off_Y  = mm2pcb(-1.1)
+	def __init__(self, name="MICROSD", libname="jae",description="MICROSD socket"):
+		package.__init__(self, name, libname,description)
+		self.smt = True
+		# make pins
+		# all units milimeters mm, always use center of the pin pad
+		pin1_X = mm2pcb(-11.55)
+		pin1_Y = mm2pcb(3.85)
+		off_X  = 0
+		off_Y  = mm2pcb(-1.1)
 	
-	# pin.thickness will set in set_pin_pad_from_size
-	Thickness = mm2pcb(1.0) 
-	# size of pads
-	padsizex = mm2pcb(1.8)
-	padsizey = mm2pcb(0.8)
-	#print "padsizex ", padsizex
-	#print "padsizey ", padsizey
+		# pin.thickness will set in set_pin_pad_from_size
+		Thickness = mm2pcb(1.0) 
+		# size of pads
+		padsizex = mm2pcb(1.8)
+		padsizey = mm2pcb(0.8)
+		#print "padsizex ", padsizex
+		#print "padsizey ", padsizey
     	
-	# Add 8 identical pins
-	for i in range(1,9):
-		#print " i ", i
-		x = pin1_X + (i-1) * off_X
-		y = pin1_Y + (i-1) * off_Y
-		pin = CPin('"'+str(i)+'"',i, x, y )	# stupid should be done automatically
+		# Add 8 identical pins
+		for i in range(1,9):
+			#print " i ", i
+			x = pin1_X + (i-1) * off_X
+			y = pin1_Y + (i-1) * off_Y
+			pin = CPin('"'+str(i)+'"',i, x, y )	# stupid should be done automatically
+			pin.pad = CPad(padsizex, padsizey, "S")
+			pin.set_pin_pad_from_size(padsizex, padsizey)
+			self.pins[pin.num]=pin
+		
+		# pads 9-12 are grounds GND_1 to GND_4
+		# GND_1 and GND_2
+		padsizex = mm2pcb(1.2)
+		padsizey = mm2pcb(1.8)
+		pin = CPin('"9"',9, 0, mm2pcb(3.3) )
 		pin.pad = CPad(padsizex, padsizey, "S")
 		pin.set_pin_pad_from_size(padsizex, padsizey)
 		self.pins[pin.num]=pin
 		
-	# pads 9-12 are grounds GND_1 to GND_4
-	# GND_1 and GND_2
-	padsizex = mm2pcb(1.2)
-	padsizey = mm2pcb(1.8)
-	pin = CPin('"9"',9, 0, mm2pcb(3.3) )
-	pin.pad = CPad(padsizex, padsizey, "S")
-	pin.set_pin_pad_from_size(padsizex, padsizey)
-	self.pins[pin.num]=pin
+		pin = CPin('"10"',10, 0, mm2pcb(-4.05) )
+		pin.pad = CPad(padsizex, padsizey, "S")
+		pin.set_pin_pad_from_size(padsizex, padsizey)
+		self.pins[pin.num]=pin
+	
+		# GND_3 and GND_4
+		padsizex = mm2pcb(1.4)
+		padsizey = mm2pcb(1.8)
+		pin = CPin('"11"',11, mm2pcb(-13.55), mm2pcb(3.25) )
+		pin.pad = CPad(padsizex, padsizey, "S")
+		pin.set_pin_pad_from_size(padsizex, padsizey)
+		self.pins[pin.num]=pin
+		
+		pin = CPin('"12"',12, mm2pcb(-13.55), mm2pcb(-3.25) )
+		pin.pad = CPad(padsizex, padsizey, "S")
+		pin.set_pin_pad_from_size(padsizex, padsizey)
+		self.pins[pin.num]=pin
+	
+		# Geometry
+		# Outline is 16.3 mm by 13.6 mm
+		# lower left corner
+		X1 = mm2pcb(-16.3) + mm2pcb(1.2)
+		Y1 = 0 - mm2pcb(13.6 / 2)
+		
+		# Upper right corner
+		X2 = mm2pcb(1.2)
+		Y2 = 0 + mm2pcb(13.6 / 2)
+		
+		dx = mm2pcb(16.3)
+		dy = mm2pcb(13.6)
+		
+		Thickness = 1000
+		
+		self.geometry.append(Line([Point(int(X1),int(Y1)),Point(int(X1),int(Y2))], int(Thickness)))
+		self.geometry.append(Line([Point(int(X1),int(Y2)),Point(int(X2),int(Y2))], int(Thickness)))
+		self.geometry.append(Line([Point(int(X2),int(Y2)),Point(int(X2),int(Y1))], int(Thickness)))
+		self.geometry.append(Line([Point(int(X2),int(Y1)),Point(int(X1),int(Y1))], int(Thickness)))
+		
+		
+		self.pcbbody = ''
 
-	pin = CPin('"10"',10, 0, mm2pcb(-4.05) )
-	pin.pad = CPad(padsizex, padsizey, "S")
-	pin.set_pin_pad_from_size(padsizex, padsizey)
-	self.pins[pin.num]=pin
-	
-	# GND_3 and GND_4
-	padsizex = mm2pcb(1.4)
-	padsizey = mm2pcb(1.8)
-	pin = CPin('"11"',11, mm2pcb(-13.55), mm2pcb(3.25) )
-	pin.pad = CPad(padsizex, padsizey, "S")
-	pin.set_pin_pad_from_size(padsizex, padsizey)
-	self.pins[pin.num]=pin
-
-	pin = CPin('"12"',12, mm2pcb(-13.55), mm2pcb(-3.25) )
-	pin.pad = CPad(padsizex, padsizey, "S")
-	pin.set_pin_pad_from_size(padsizex, padsizey)
-	self.pins[pin.num]=pin
-	
-	# Geometry
-	# Outline is 16.3 mm by 13.6 mm
-	# lower left corner
-	X1 = mm2pcb(-16.3) + mm2pcb(1.2)
-        Y1 = 0 - mm2pcb(13.6 / 2)
-	
-	# Upper right corner
-        X2 = mm2pcb(1.2)
-        Y2 = 0 + mm2pcb(13.6 / 2)
-	
-	dx = mm2pcb(16.3)
-	dy = mm2pcb(13.6)
-	
-        Thickness = 1000
- 
-        self.geometry.append(Line([Point(int(X1),int(Y1)),Point(int(X1),int(Y2))], int(Thickness)))
-	self.geometry.append(Line([Point(int(X1),int(Y2)),Point(int(X2),int(Y2))], int(Thickness)))
-	self.geometry.append(Line([Point(int(X2),int(Y2)),Point(int(X2),int(Y1))], int(Thickness)))
-	self.geometry.append(Line([Point(int(X2),int(Y1)),Point(int(X1),int(Y1))], int(Thickness)))
-	
- 
-        self.pcbbody = ''
-	
 
 
 class ST1W008S4E(Component):
