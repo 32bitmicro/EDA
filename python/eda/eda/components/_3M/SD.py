@@ -382,5 +382,5 @@ class SD_RSMT(Component):
 # Some tests
 if __name__ == "__main__":
 	sd_2908 = SD_2908("CON1","","SD_2908")
-	print st1w008s4e
+	print sd_2908
 
