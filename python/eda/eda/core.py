@@ -64,13 +64,13 @@ class Rectangle:
 		
 	def __str__(self):
 		return str(self.ll) + " , " + str(self.ur)
-    
+
 	def normalize(self):
 		x1 = self.ll._x
 		y1 = self.ll._y
 		x2 = self.ur._x
 		y2 = self.ur._y
-    	
+
 		if x1 < x2:
 			llx = x1
 			urx = x2
@@ -86,7 +86,7 @@ class Rectangle:
 			ury = y1
 		self.ll = Point(llx,lly,self.ll.layernum)
 		self.ur = Point(urx,ury,self.ur.layernum)
-    	    
+
 	def sizeX(self):
 		return self.ur._x - self.ll._x
 
@@ -114,7 +114,7 @@ class Rectangle:
 #
 #	def __selfser__(self, lines):
 #		lines.append('Rectangle('+str(self.ll._x)+','+str(self.ll._y)+','+str(self.ll._x)+','+str(self.ll._y)+','+str(self.layernum)+')')
-        
+
 class Line:
 	def __init__(self,points=[],thickness=1, layernum=0):
 #		print "Line init points arg " + str(len(points))
@@ -123,12 +123,12 @@ class Line:
 		self.layernum = layernum
 		self.index = 0
 		self.bbox = Rectangle()
-    	
+
 	def __str__(self):
 		s = "line "
 		s += " num points " + str(len(self.points))
 		for p in self.points:
-#			s += str(p) + " " 
+			s += str(p) + " " 
 			pass
 		return s
 		
@@ -151,17 +151,14 @@ class Line:
 		miny = 0 
 		maxx = 0
 		maxy = 0
-		prevpt = Point(0,0)
 		first = True
-		for pt in self.points:			
-			print pt
+		for pt in self.points:
 			if first:
 				minx = pt._x
 				miny = pt._y
 				maxx = pt._x
 				maxy = pt._y
 				first = False
-				prevpt = pt
 			else:
 				if minx > pt._x:
 					minx = pt._x
@@ -171,8 +168,6 @@ class Line:
 					maxx = pt._x
 				if maxy < pt._y:
 					maxy = pt._y
-				prevpt = pt
-		
 		self.bbox=Rectangle(minx,miny,maxx,maxy)
 
 # based on Line but has to be closed	
@@ -183,7 +178,7 @@ class Polygon(Line):
 		self.bbox = Rectangle()
 	
 	def __str__(self):
-        	return "Polygon() points" + str(self.points)
+		return "Polygon() points" + str(self.points)
 		
 
 # ElementArc [X Y Width Height StartAngle DeltaAngle Thickness]
@@ -197,7 +192,7 @@ class Arc(Point):
 		self.thickness = thickness		# thickness
 		self.index = 0
 		self.bbox = Rectangle()
-    	
+
 	def __str__(self):
 		return "Arc() point" + "%.3f %.3f" % (self._x, self._y)
 
@@ -206,7 +201,7 @@ class Circle(Arc):
 	def __init__(self, x=0, y=0, diameter=0, thickness=1, layernum=0 ):
 		Arc.__init__(self,x,y,diameter/2,diameter/2,0,360,thickness,layernum)
 		self.bbox = Rectangle()
-    	
+
 	def __str__(self):
 		"Circle() point" + "%.3f %.3f" % (self._x, self._y) + "diameter "
 		
@@ -226,18 +221,18 @@ class Text(Point):
 			self.thickness = thickness
 			self.bbox = Rectangle()
 			
-    
+
 	def __str__(self):
-        	self.text
-        
-# Pad class - throughole or smt
+		self.text
+
+# Pad class - through hole or smt
 # Square - S
 # Round  - R
 # for Square size[xy] is length of the edge
 # for Round size[xy] is the diameter in x or y direction, if x != y then oval?
 class CPad:
-	def __init__(self,sizex=0, sizey=0, type="S", drill=0):
-		self.type=type					# square
+	def __init__(self,sizex=0, sizey=0, _type="S", drill=0):
+		self.type=_type					# square
 		self.drill = drill
 		self.sizex = sizex
 		self.sizey = sizey
@@ -249,10 +244,10 @@ class CPad:
 		self.tag	= 0
 	
 	def __str__(self):
-		return self.type + ' : drill ' + str(self.drill) + ' sizex ' + str(sizex) + ' sizey ' + str(sizey) + ' bbox ' + str(self.bbox)
+		return self.type + ' : drill ' + str(self.drill) + ' sizex ' + str(self.sizex) + ' sizey ' + str(self.sizey) + ' bbox ' + str(self.bbox)
 	
 	
-# Pin class - throughole or smt
+# Pin class - through hole or smt
 class CPin:
 	def __init__(self,name="",num=-1, x=0, y=0, pad=None):
 		self.name=name
@@ -302,14 +297,14 @@ class CPin:
 		self.rY2=rY2
 	
 		size = self.thickness + self.clearance
-	        # make bbox and normalize it
-	        self.bbox = Rectangle(rX1,rY1,rX2,rY2,0)
-	        # # make bbox covering pin with clearance, will be used for blockages
-	        rX1=self.bbox.ll._x - size / 2
-	        rY1=self.bbox.ll._y - size / 2
-	        rX2=self.bbox.ur._x + size / 2
-	        rY2=self.bbox.ur._y + size / 2
-	        self.bbox = Rectangle(rX1,rY1,rX2,rY2,0)
+		# make bbox and normalize it
+		self.bbox = Rectangle(rX1,rY1,rX2,rY2,0)
+		# # make bbox covering pin with clearance, will be used for blockages
+		rX1=self.bbox.ll._x - size / 2
+		rY1=self.bbox.ll._y - size / 2
+		rX2=self.bbox.ur._x + size / 2
+		rY2=self.bbox.ur._y + size / 2
+		self.bbox = Rectangle(rX1,rY1,rX2,rY2,0)
 
 		
 # Schematic Port class
@@ -357,7 +352,7 @@ class CSymbol:
 # Schematic Package
 class CPackage:
 	def __init__(self, name="", libname="",description=""):
-		self.name=name					# packge name
+		self.name=name					# package name
 		self.libname=libname			# library name
 		self.description=description	# description
 		self.smt = False
@@ -538,17 +533,16 @@ class CDev:
 		first = True
 		minX = 0
 		maxX = 0
-		for ppin in self.package.pins.values():
-			pin = self.pins[ppin.num]
+		for pin in self.package.pins.values():
 			if first:
-				minX = ppin.pos._x
-				maxX = ppin.pos._x
+				minX = pin.pos._x
+				maxX = pin.pos._x
 			
-			if minX > ppin.pos._x:
-				minX = ppin.pos._x
+			if minX > pin.pos._x:
+				minX = pin.pos._x
 				
-			if maxX < ppin.pos._x:
-				maxX = ppin.pos._x
+			if maxX < pin.pos._x:
+				maxX = pin.pos._x
 
 		return maxX, minX		
 		
@@ -557,17 +551,16 @@ class CDev:
 		first = True
 		minY = 0
 		maxY = 0
-		for ppin in self.package.pins.values():
-			pin = self.pins[ppin.num]
+		for pin in self.package.pins.values():
 			if first:
-				minY = ppin.pos._y
-				maxY = ppin.pos._y
+				minY = pin.pos._y
+				maxY = pin.pos._y
 			
-			if minY > ppin.pos._y:
-				minY = ppin.pos._y
+			if minY > pin.pos._y:
+				minY = pin.pos._y
 				
-			if maxY < ppin.pos._y:
-				maxY = ppin.pos._y
+			if maxY < pin.pos._y:
+				maxY = pin.pos._y
 
 		return maxY, minY
 		
@@ -697,9 +690,9 @@ class CSchematic:
 		self.num	= -1
 		self.outline	= Polygon()
 		self.libraries	= []
-		self.devices	= CDevices() #{}
-		self.symbols	= CSymbols() #{}
-		self.nets	= CNets()    #{}
+		self.devices	= CDevices()
+		self.symbols	= CSymbols()
+		self.nets	= CNets()
 		self.refids	= -1
 		self.geometry	= []
 	
@@ -883,10 +876,10 @@ class CBoard:
 		self.outline=Polygon()
 #		self.sch = sch
 		self.libraries=[]
-		self.devices=CDevices() #{}
-		self.packages=CPackages() #{}
+		self.devices=CDevices()
+		self.packages=CPackages()
 		self.vias=[]
-		self.nets=CNets() #{}
+		self.nets=CNets()
 		self.pours=[]
 		self.geometry=[]
 		self.refids=-1
@@ -903,7 +896,7 @@ class CBoard:
 			self.addNet(net)
 		
 		for lib in sch.libraries:
-			self.addLibary(net)
+			self.addLibary(lib)
 			
 	def addLibrary(self, item):
 		self.libraries.append(item)
@@ -942,7 +935,7 @@ class CBoard:
 # Some tests
 if __name__ == "__main__":
 	schem = CSchematic()
-	ic1 = CIC()
+	ic1 = CDev()
 	ic1.refid ="U1"
 
 	ic1.add( CPin("GND",1) )
@@ -956,7 +949,6 @@ if __name__ == "__main__":
 	net2 = CNet("VCC")
 	net2.add(CNode(ic1,2))
 	schem.addNet(net2)
-	eagle = CEagle(schem)
-	eagle.outputNetlistScript()
+	
 
 
