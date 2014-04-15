@@ -100,7 +100,6 @@ class LPC213X(Component):
 		self.addPin( CPin("VREF",							63))
 		self.addPin( CPin("P1.27/TDO",						64))
 
-	 
 
 # Some tests
 if __name__ == "__main__":

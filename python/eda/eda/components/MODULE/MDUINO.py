@@ -46,22 +46,24 @@ class MDUINO(package):
         Drill = 3600 #4000
         num = 1
         # pins defined in a circle
-	rX = 0
-	rY = 0
-	minum = 0
+        rX = 0
+        dx = 3000 # FIXME
+        dy = 3000 # FIXME
+        rY = 0
+        minum = 0
         for mi in range(M*4):
             if mi == 0:
-		rX += 0
-		rY += 0 
+                rX += 0
+                rY += 0 
             elif mi == M*4/4:
-		rX += 0
-		rY += dy
+                rX += 0
+                rY += dy
             elif mi == M*4/2:
-		rX += dx
-		rY += 0
+                rX += dx
+                rY += 0
             elif mi == M*4*3/4:
-		rX += 0
-		rY += -dy
+                rX += 0
+                rY += -dy
 
             if mi < (M*4/4):                        # upper left corner down
                 rX = rX
@@ -111,7 +113,7 @@ class MDUINO(package):
         X2 = x + dx * (M + 1) + 5000
         Y2 = y + dy * (M + 1) + 5000
         Thickness = 1000
-	# Outline
+        # Outline
         line = Line([Point(int(X1),int(Y1)),Point(int(X1),int(Y2))], int(Thickness))
         self.geometry.append(line)
         line = Line([Point(int(X2),int(Y1)),Point(int(X2),int(Y2))], int(Thickness))
@@ -120,42 +122,16 @@ class MDUINO(package):
         self.geometry.append(line)
         line = Line([Point(int(X1),int(Y2)),Point(int(X2),int(Y2))], int(Thickness))
         self.geometry.append(line)
-	# Mounting holes
-	d = 25000
-	ddx = 20000
-	ddy = 20000
-	cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
+        # Mounting holes
+        d = 25000
+        ddx = 20000
+        ddy = 20000
+        cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
         self.pcbbody = ''
-
-
-class MDUINO(Component):
-    "MDUINO"
-    def __init__(self, refid, val, name="MDUINO", libname="module", symbolname="MDUINO", packagename="MDUINO"):
-        Component.__init__(self, refid, val, name, libname, symbolname, packagename)
-        self.package = MDUINO_package(name="MDUINO", libname="package",description="MDUINO module ", dx = 10000, dy = 10000)                 # should call make header
-        self.parsePackage()                                # do we need this?
-#        for i in range(80):
-#            self.addPin( CPin("P"+str(i),    (i+1)    ))
-#
-#        self.addPin( CPin("SOUT",   1    ))
-#        self.addPin( CPin("SIN",    2    ))
-#        self.addPin( CPin("ATN",    3    ))
-#        self.addPin( CPin("VSS_1",  4    ))
-#        # 5 - 20  = P0 - P15
-#        for i in range(16):
-#            self.addPin( CPin("P"+str(i),    (i+5)    ))
-#        # 21 - 36 = X0 - X15
-#        for i in range(16):
-#            self.addPin( CPin("X"+str(i),    (i+21)    ))
-#        self.addPin( CPin("VDD",    37    ))
-#        self.addPin( CPin("RESET#", 38    ))
-#        self.addPin( CPin("VSS_2",  39    ))
-#        self.addPin( CPin("VIN",    40    ))
-        

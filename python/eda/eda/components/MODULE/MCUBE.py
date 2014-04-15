@@ -46,22 +46,22 @@ class MCUCUBE_package(package):
         Drill = 3600 #4000
         num = 1
         # pins defined in a circle
-	rX = 0
-	rY = 0
-	minum = 0
+        rX = 0
+        rY = 0
+        minum = 0
         for mi in range(M*4):
             if mi == 0:
-		rX += 0
-		rY += 0 
+                rX += 0
+                rY += 0 
             elif mi == M*4/4:
-		rX += 0
-		rY += dy
+                rX += 0
+                rY += dy
             elif mi == M*4/2:
-		rX += dx
-		rY += 0
+                rX += dx
+                rY += 0
             elif mi == M*4*3/4:
-		rX += 0
-		rY += -dy
+                rX += 0
+                rY += -dy
 
             if mi < (M*4/4):                        # upper left corner down
                 rX = rX
@@ -111,7 +111,7 @@ class MCUCUBE_package(package):
         X2 = x + dx * (M + 1) + 5000
         Y2 = y + dy * (M + 1) + 5000
         Thickness = 1000
-	# Outline
+        # Outline
         line = Line([Point(int(X1),int(Y1)),Point(int(X1),int(Y2))], int(Thickness))
         self.geometry.append(line)
         line = Line([Point(int(X2),int(Y1)),Point(int(X2),int(Y2))], int(Thickness))
@@ -120,18 +120,18 @@ class MCUCUBE_package(package):
         self.geometry.append(line)
         line = Line([Point(int(X1),int(Y2)),Point(int(X2),int(Y2))], int(Thickness))
         self.geometry.append(line)
-	# Mounting holes
-	d = 25000
-	ddx = 20000
-	ddy = 20000
-	cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
+        # Mounting holes
+        d = 25000
+        ddx = 20000
+        ddy = 20000
+        cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
         self.pcbbody = ''
 
 
@@ -155,25 +155,25 @@ class MCUBE_package(package):
         num = 1
         # pins defined in a 2 circles - inner and outer
 
-	# outer circle 
-	rX = 0 
-	rY = 0 + dy
-	minum = 0
+        # outer circle 
+        rX = 0 
+        rY = 0 + dy
+        minum = 0
         for mi in range(M*4):
             if mi == 0:
-		rX += 0
-		rY += 0 
+                rX += 0
+                rY += 0 
             elif mi == M*4/4:
-		rX += 0 + dx
-		rY += 2 * dy
+                rX += 0 + dx
+                rY += 2 * dy
             elif mi == M*4/2:
-		rX += 2 * dx
-		rY += 0 - dy
+                rX += 2 * dx
+                rY += 0 - dy
             elif mi == M*4*3/4:
-		rX += 0 - dx
-		rY += 2 * -dy
+                rX += 0 - dx
+                rY += 2 * -dy
 
-            if mi < (M*4/4):                        # upper left corner down
+            if mi < (M*4/4):                         # upper left corner down
                 rX = rX
                 rY = rY + dy
             elif mi >= (M*4/4) and mi < (M*4/2) :     # lower left corner rigth 
@@ -217,23 +217,23 @@ class MCUBE_package(package):
             self.pins[pin.num]=pin
             num = num  + 1
                
-	# inner circle 
-	rX = 0 + dx
-	rY = 0 + dy
-	minum = 0
+            # inner circle 
+            rX = 0 + dx
+            rY = 0 + dy
+            minum = 0
         for mi in range(M*4):
             if mi == 0:
-		rX += 0
-		rY += 0 
+                rX += 0
+                rY += 0 
             elif mi == M*4/4:
-		rX += 0
-		rY += dy
+                rX += 0
+                rY += dy
             elif mi == M*4/2:
-		rX += dx
-		rY += 0
+                rX += dx
+                rY += 0
             elif mi == M*4*3/4:
-		rX += 0
-		rY += -dy
+                rX += 0
+                rY += -dy
 
             if mi < (M*4/4):                        # upper left corner down
                 rX = rX
@@ -280,13 +280,13 @@ class MCUBE_package(package):
             num = num  + 1
 
 
-	# 
+
         X1 = x - 10000
         Y1 = y - 10000
         X2 = x + dx * (M + 3) + 10000
         Y2 = y + dy * (M + 3) + 10000
         Thickness = 1000
-	# Outline
+        # Outline
         line = Line([Point(int(X1),int(Y1)),Point(int(X1),int(Y2))], int(Thickness))
         self.geometry.append(line)
         line = Line([Point(int(X2),int(Y1)),Point(int(X2),int(Y2))], int(Thickness))
@@ -295,31 +295,31 @@ class MCUBE_package(package):
         self.geometry.append(line)
         line = Line([Point(int(X1),int(Y2)),Point(int(X2),int(Y2))], int(Thickness))
         self.geometry.append(line)
-	# Mounting holes
-	d  = 25000 # 0.25" inch spacer
-	d1 = 11811 # 3 mm whole
-	ddx = 12500
-	ddy = 12500
-	cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X1+ddx), int(Y1+ddy),int(d1),int(Thickness))
-	self.geometry.append(cir)
-
-	cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X1+ddx), int(Y2-ddy),int(d1),int(Thickness))
-	self.geometry.append(cir)
-
-	cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y1+ddy),int(d1),int(Thickness))
-	self.geometry.append(cir)
-
-	cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
-	self.geometry.append(cir)
-	cir = Circle(int(X2-ddx), int(Y2-ddy),int(d1),int(Thickness))
-	self.geometry.append(cir)
-
+        # Mounting holes
+        d  = 25000 # 0.25" inch spacer
+        d1 = 11811 # 3 mm whole
+        ddx = 12500
+        ddy = 12500
+        cir = Circle(int(X1+ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X1+ddx), int(Y1+ddy),int(d1),int(Thickness))
+        self.geometry.append(cir)
+        
+        cir = Circle(int(X1+ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X1+ddx), int(Y2-ddy),int(d1),int(Thickness))
+        self.geometry.append(cir)
+        
+        cir = Circle(int(X2-ddx), int(Y1+ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y1+ddy),int(d1),int(Thickness))
+        self.geometry.append(cir)
+        
+        cir = Circle(int(X2-ddx), int(Y2-ddy),int(d),int(Thickness))
+        self.geometry.append(cir)
+        cir = Circle(int(X2-ddx), int(Y2-ddy),int(d1),int(Thickness))
+        self.geometry.append(cir)
+        
         self.pcbbody = ''
 
 

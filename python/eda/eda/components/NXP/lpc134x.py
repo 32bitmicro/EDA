@@ -34,8 +34,8 @@ class HVQFN33(package):
     def __init__(self, name="HVQFN33", libname="package",description="HVQFN33 package"):
         package.__init__(self, name, libname,description)
         self.smt = True
-	# footgen HVQFN33 
-        s = """
+        # footgen HVQFN33 
+        self.pcbbody = """
 (
 	Pad[-14371  -8956 -11615  -8956 1575  0 1575 "1" "1"   0x00000100]
 	Pad[-14371  -6397 -11615  -6397 1575  0 1575 "2" "2"   0x00000100]
@@ -75,8 +75,7 @@ class HVQFN33(package):
 	ElementLine [-16142 -16142  16142 -16142 1000]
 	ElementLine [ 16142 -16142  16142  16142 1000]
 )
-	"""  + CRLF
-        self.pcbbody = s
+	    """  + CRLF
 
 	# Problem solder mask is not correct
 	# Problem with pin 33 which should be devided into 9 pads

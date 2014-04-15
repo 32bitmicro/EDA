@@ -37,14 +37,14 @@ from eda.components import *
 # pads 3 and 4 are just for mounting
 
 class JST_2x2_package(package):
-    def __init__(self, name="JST_2x2", libname="jst",description="JST 2 pin 2 mm package"):
+	def __init__(self, name="JST_2x2", libname="jst",description="JST 2 pin 2 mm package"):
 		package.__init__(self, name, libname,description)
 		self.smt = True
 		# all dims in mm
 		# horizontal orientation with pins 1 and 2 on the left
 		# origin is on the left side of the pins X and in the middle between pins Y
 		# pins 3 and 4 are for soldering only can be connected to GND
-		 
+
 		padsizex = mm2pcb(3.50)
 		padsizey = mm2pcb(1.00)
 		pad_X = mm2pcb(3.50/2)
@@ -106,8 +106,8 @@ class JST_2x2_package(package):
 		self.geometry.append(Line([Point(int(X2),int(Y1)),Point(int(X1),int(Y1))], int(Thickness)))
 
 class JST_2(Component):
-    "JST 2 pin 2mm side entry connector class"
-    def __init__(self, refid, val, name="JST_2", libname="header", symbolname="JST_2", packagename="JST_2"):
+	"JST 2 pin 2mm side entry connector class"
+	def __init__(self, refid, val, name="JST_2", libname="header", symbolname="JST_2", packagename="JST_2"):
 		Component.__init__(self, refid, val, name, libname, symbolname, packagename)
 		self.package = JST_2x2_package(packagename, libname, "JST 2 pin 2mm side entry")
 		self.parsePackage()
@@ -121,4 +121,3 @@ class JST_2(Component):
 if __name__ == "__main__":
 	componnet = JST_2("CON1","","JST_2")
 	print componnet
-
