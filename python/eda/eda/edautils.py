@@ -1,11 +1,13 @@
 __version__ = 1.2
 
+import ctypes
+
 # EDA Utils
 # Amazing quick
-def expandtab(str,tab=8):
-   return reduce(lambda a,b: 
+def expandtab(_str,tab=8):
+    return reduce(lambda a,b: 
                       a + ' '*(tab-len(a)%tab) + b,
-                      str.split('\t')
+                      _str.split('\t')
                 )
    
    

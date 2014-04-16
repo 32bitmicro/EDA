@@ -889,7 +889,7 @@ $EndSETUP
 						s = self.genSchLayersScr()
 						return s
 					
-				if net-connect:
+				if net_connect:
 					pass
 					
 				if netlist:
@@ -949,7 +949,7 @@ if __name__ == "__main__":
 	board = CBoard(schem)
 	board.addFromSchematic()
 
-	pads = CPADS(schem,board)
+	pads = CKICAD(schem,board)
 	#print sys.argv[1]
 	#print sys.argv[2]
 	# import file
@@ -959,4 +959,3 @@ if __name__ == "__main__":
 	# open input file
 	if sys.argv[1:] == ['test']:
 		pads.test()
-    

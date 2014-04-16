@@ -68,20 +68,20 @@ class CXMLPickle:
         pickle.Pickler(f).dump(self.sch.devices)
 
     def pickleSymbols(self,f):
-	pickle.Pickler(f).dump(self.sch.symbols)
-	
+        pickle.Pickler(f).dump(self.sch.symbols)
+
     def pickleNets(self,f):
         pickle.Pickler(f).dump(self.sch.nets)
-	
+        
     def pickleAll(self, f_sch, f_brd):
         self.pickleSchematic(f_sch)
         self.pickleBoard(f_brd)
     
 # Unpickle 
-#    def unpickleBoardFromsString(self, xml_string):
+    def unpickleBoardFromsString(self, xml_string):
         self.brd = pickle.Unpickler().loads(xml_string)
         
-#    def unpickleSchematicFromsString(self, xml_string):
+    def unpickleSchematicFromsString(self, xml_string):
         self.sch = pickle.Unpickler().loads(xml_string)
        
     def unpickleAllFromsString(self, sch_xml_string, brd_xml_string):
@@ -89,23 +89,23 @@ class CXMLPickle:
         self.unpickleBoard(brd_xml_string)
         
     def unpickleBoard(self, f):
-	self.brd = pickle.Unpickler(f).load()
+        self.brd = pickle.Unpickler(f).load()
 
     def unpickleBoardDevices(self,f):
-	self.brd.devices = pickle.Unpickler(f).load()
+        self.brd.devices = pickle.Unpickler(f).load()
 
     def unpickleBoardGeometry(self,f):
-	self.brd.geometry = pickle.Unpickler(f).load()
+        self.brd.geometry = pickle.Unpickler(f).load()
 
     def unpickleSchematic(self, f):
         self.sch = pickle.Unpickler(f).load()
-	
+
     def unpickleDevices(self,f):
         self.sch.devices = pickle.Unpickler(f).load()
 
     def unpickleSymbols(self,f):
-	self.sch.symbols = pickle.Unpickler(f).load()
-	
+        self.sch.symbols = pickle.Unpickler(f).load()
+
     def unpickleNets(self,f):
         self.sch.nets = pickle.Unpickler(f).load()
        

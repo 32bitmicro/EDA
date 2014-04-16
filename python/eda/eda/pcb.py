@@ -830,7 +830,7 @@ class CPCB:
 		self.name=""
 		self.sch=sch
 		self.brd=brd
-		self.script_path="F:/usr/local/hobby-robotics/src/lpcbasic/gen"
+		self.script_path=""
 
 
 	def addLayers(self):
@@ -1884,7 +1884,7 @@ if __name__ == "__main__":
 	board = CBoard(schem)
 	board.addFromSchematic()
 
-	mucs = CMUCS(schem,board)
+	mucs = CPCB(schem,board)
 	
 	# open input file
 	if sys.argv[1:] == ['test']:

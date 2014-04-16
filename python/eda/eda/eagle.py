@@ -559,7 +559,7 @@ class CEagle:
 				thickness = 0.01 # line.thickness * 0.00001
 				if first:
 					first = False	
-					firstpt =Point(pt._x, pt._y)
+					firstpt = Point(pt._x, pt._y)
 					prevpt = Point(pt._x, pt._y)
 				else:
 					ns += "WIRE " + str(thickness) + " (" + str(prevpt) +") (" + str(pt) +");" + CRLF
@@ -1083,7 +1083,7 @@ class CEagle:
 						s = self.genSchLayersScr()
 						return s
 					
-				if net-connect:
+				if net_connect:
 					pass
 					
 				if netlist:
@@ -1148,4 +1148,4 @@ if __name__ == "__main__":
 	# open input file
 	if sys.argv[1:] == ['test']:
 		eagle.test()
-    
+
