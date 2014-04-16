@@ -27,6 +27,7 @@
 
 from eda import *
 from eda.components.component import *
+from eda.components.LDO.ld1117 import *
 
 # Handle LDOs as sub-circuit aka module
 # Adds all passive elements and nets to the schematic

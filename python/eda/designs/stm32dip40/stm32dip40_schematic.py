@@ -26,6 +26,7 @@
 #SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from eda import *
+from eda.packages.package import *
 
 from eda.components.NXP.lpc214x import *
 

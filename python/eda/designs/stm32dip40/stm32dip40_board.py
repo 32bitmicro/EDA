@@ -49,7 +49,7 @@ def import_schematic():
 	return sch
 
 def make(sch, dname="stm32dip40", lname="stm32dip40"):
- 	# Board
+	# Board
 	DesignName = dname
 	LibName = lname
 
