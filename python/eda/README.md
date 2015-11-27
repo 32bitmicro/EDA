@@ -1,4 +1,4 @@
 
 
-easy_install simpleparse
+easy_install eda
 
